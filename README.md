@@ -1,4 +1,4 @@
-### Enviroment
+### Environment
 
 ```
   System:
@@ -22,16 +22,31 @@ https://github.com/ShererJohn/qwiklab
 
 ### Describe the issue
 
-Whenever a `Link` element goes to a page that imports `plugin@auth` it breaks. 
+Whenever a `Link` component goes to a page that imports `plugin@auth` it breaks. 
 
 ```
 SyntaxError: The requested module '/node_modules/cookie/index.js?v=da1814f6' does not provide an export named 'parse' (at jwt.js?v=da1814f6:42:10)
 ```
 
-- This bug only effects the link component. If you use an `a` element instead of a `Link` component the page will load and the functionality of the plugin will be uneffected.
+- This bug only effects the link component. If you use an `a` element instead of a `Link` component the page will load. The functionality of the plugin is uneffected.
 
 - This bug presists even if you're not using the jwt session strategy
 
+### How to reproduce
+
+```
+git clone https://github.com/ShererJohn/qwiklab.git
+cd ./qwiklab
+```
+next add these env variables
+```
+AUTH_SECRET=
+AUTH_GOOGLE_ID=
+AUTH_GOOGLE_SECRET=
+```
+You can change the provider if you want.
+Then run `npm run dev`, open the index page, and then click the link named "Problem link"
+
 ### Expected behavior
 
-The link component should load the linked page.
+The Link component is supposed to go to the linked page.
