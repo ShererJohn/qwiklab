@@ -1,5 +1,6 @@
 ### Enviroment
 
+```
   System:
     OS: Linux 6.10 Fedora Linux 40 (Workstation Edition)
     CPU: (4) x64 Intel(R) Core(TM) i5-3320M CPU @ 2.60GHz
@@ -13,7 +14,7 @@
     bun: 1.1.22 - ~/.bun/bin/bun
   npmPackages:
     @auth/qwik: 0.2.2 => 0.2.2 
-
+```
 
 ### Reproduction URL
 
@@ -30,3 +31,7 @@ SyntaxError: The requested module '/node_modules/cookie/index.js?v=da1814f6' doe
 - This bug only effects the link component. If you use an `a` element instead of a `Link` component the page will load and the functionality of the plugin will be uneffected.
 
 - This bug presists even if you're not using the jwt session strategy
+
+### Expected behavior
+
+The link component should load the linked page.
