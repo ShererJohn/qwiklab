@@ -1,65 +1,32 @@
-# Qwik City App ⚡️
+### Enviroment
 
-- [Qwik Docs](https://qwik.dev/)
-- [Discord](https://qwik.dev/chat)
-- [Qwik GitHub](https://github.com/QwikDev/qwik)
-- [@QwikDev](https://twitter.com/QwikDev)
-- [Vite](https://vitejs.dev/)
+  System:
+    OS: Linux 6.10 Fedora Linux 40 (Workstation Edition)
+    CPU: (4) x64 Intel(R) Core(TM) i5-3320M CPU @ 2.60GHz
+    Memory: 5.31 GB / 15.48 GB
+    Container: Yes
+    Shell: 5.2.26 - /bin/bash
+  Binaries:
+    Node: 22.5.1 - ~/.nvm/versions/node/v22.5.1/bin/node
+    Yarn: 1.22.22 - /usr/bin/yarn
+    npm: 10.9.0 - ~/.nvm/versions/node/v22.5.1/bin/npm
+    bun: 1.1.22 - ~/.bun/bin/bun
+  npmPackages:
+    @auth/qwik: 0.2.2 => 0.2.2 
 
----
 
-## Project Structure
+### Reproduction URL
 
-This project is using Qwik with [QwikCity](https://qwik.dev/qwikcity/overview/). QwikCity is just an extra set of tools on top of Qwik to make it easier to build a full site, including directory-based routing, layouts, and more.
+https://github.com/ShererJohn/qwiklab
 
-Inside your project, you'll see the following directory structure:
+### Describe the issue
+
+Whenever a `Link` element goes to a page that imports `plugin@auth` it breaks. 
 
 ```
-├── public/
-│   └── ...
-└── src/
-    ├── components/
-    │   └── ...
-    └── routes/
-        └── ...
+SyntaxError: The requested module '/node_modules/cookie/index.js?v=da1814f6' does not provide an export named 'parse' (at jwt.js?v=da1814f6:42:10)
 ```
 
-- `src/routes`: Provides the directory-based routing, which can include a hierarchy of `layout.tsx` layout files, and an `index.tsx` file as the page. Additionally, `index.ts` files are endpoints. Please see the [routing docs](https://qwik.dev/qwikcity/routing/overview/) for more info.
+- This bug only effects the link component. If you use an `a` element instead of a `Link` component the page will load and the functionality of the plugin will be uneffected.
 
-- `src/components`: Recommended directory for components.
-
-- `public`: Any static assets, like images, can be placed in the public directory. Please see the [Vite public directory](https://vitejs.dev/guide/assets.html#the-public-directory) for more info.
-
-## Add Integrations and deployment
-
-Use the `npm run qwik add` command to add additional integrations. Some examples of integrations includes: Cloudflare, Netlify or Express Server, and the [Static Site Generator (SSG)](https://qwik.dev/qwikcity/guides/static-site-generation/).
-
-```shell
-npm run qwik add # or `yarn qwik add`
-```
-
-## Development
-
-Development mode uses [Vite's development server](https://vitejs.dev/). The `dev` command will server-side render (SSR) the output during development.
-
-```shell
-npm start # or `yarn start`
-```
-
-> Note: during dev mode, Vite may request a significant number of `.js` files. This does not represent a Qwik production build.
-
-## Preview
-
-The preview command will create a production build of the client modules, a production build of `src/entry.preview.tsx`, and run a local server. The preview server is only for convenience to preview a production build locally and should not be used as a production server.
-
-```shell
-npm run preview # or `yarn preview`
-```
-
-## Production
-
-The production build will generate client and server modules by running both client and server build commands. The build command will use Typescript to run a type check on the source code.
-
-```shell
-npm run build # or `yarn build`
-```
+- This bug presists even if you're not using the jwt session strategy
